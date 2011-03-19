@@ -3,6 +3,7 @@ Feature: List of beers
 	As a user
 	I should be able to mark those items which should be displayed
 
+	@items
 	Scenario: Show list of items
 		Given I am on the home page
 		Then I should see "test1"
