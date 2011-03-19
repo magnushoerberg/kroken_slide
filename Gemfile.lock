@@ -1,0 +1,28 @@
+GEM
+  specs:
+    builder (3.0.0)
+    cucumber (0.10.0)
+      builder (>= 2.1.2)
+      diff-lcs (~> 1.1.2)
+      gherkin (~> 2.3.2)
+      json (~> 1.4.6)
+      term-ansicolor (~> 1.0.5)
+    diff-lcs (1.1.2)
+    gherkin (2.3.4-x86-mingw32)
+      json (~> 1.4.6)
+    haml (3.0.25)
+    json (1.4.6-x86-mingw32)
+    rack (1.2.2)
+    sinatra (1.2.1)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
+    term-ansicolor (1.0.5)
+    tilt (1.2.2)
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  cucumber
+  haml
+  sinatra
