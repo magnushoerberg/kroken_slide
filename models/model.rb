@@ -3,5 +3,5 @@ class Item
 
   property :id, Serial
   property :name, String
-  property :price, Decimal
+  property :price, Float
 end
