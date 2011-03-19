@@ -4,7 +4,10 @@ class KrokenSlide < Sinatra::Base
 
 	configure :development do
 		DataMapper::Logger.new($stdout, :debug)
-		DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/dev.db")
+		DataMapper.setup(:default, "sqlite://#{Dir.pwd}/dev.db")
+	end
+	configure :test do 
+		DataMapper.setup(:default, "sqlite::memory:")
 	end
 	configure do; DataMapper.finalize end
 
