@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.2.4)
     builder (3.0.0)
     capybara (0.4.1.2)
       celerity (>= 0.7.9)
@@ -23,7 +24,19 @@ GEM
     cucumber-sinatra (0.3.0)
       templater (>= 1.0.0)
     culerity (0.2.15)
+    data_objects (0.10.3)
+      addressable (~> 2.1)
     diff-lcs (1.1.2)
+    dm-core (1.1.0)
+      addressable (~> 2.2.4)
+    dm-do-adapter (1.1.0)
+      data_objects (~> 0.10.2)
+      dm-core (~> 1.1.0)
+    dm-sqlite-adapter (1.1.0)
+      dm-do-adapter (~> 1.1.0)
+      do_sqlite3 (~> 0.10.2)
+    do_sqlite3 (0.10.3-x86-mingw32)
+      data_objects (= 0.10.3)
     extlib (0.9.15)
     ffi (0.6.3)
       rake (>= 0.8.7)
@@ -73,6 +86,9 @@ DEPENDENCIES
   capybara
   cucumber
   cucumber-sinatra
+  dm-core
+  dm-sqlite-adapter
+  do_sqlite3
   haml
   rspec-expectations
   sinatra
