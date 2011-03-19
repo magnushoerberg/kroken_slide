@@ -1,1 +1,7 @@
 small sinatra slideshow app, using jquery
+
+To migrate the db type
+>rake db:migrate
+
+To run entire test sweet type:
+>cucumber
