@@ -1,2 +1,13 @@
-%div
-  %p hej
+%table
+  %thead
+    %tr
+      %td Namn
+      %td Pris
+      %td Uthämtad?
+  %tbody
+    -for item in @items
+      %tr
+        %td= item.name
+        %td #{item.price.to_i}kr
+        %td
+          %input{:type=>"checbox", :name=>"added?"}

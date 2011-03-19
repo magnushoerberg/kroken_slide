@@ -11,5 +11,8 @@ class KrokenSlide < Sinatra::Base
 	end
 	configure do; DataMapper.finalize end
 
-	get '/' do; haml :index end
+	get '/' do
+		@items = Item.all
+		haml :index
+	end
 end
