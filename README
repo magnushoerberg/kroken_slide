@@ -11,8 +11,8 @@ To run entire test sweet type:
 
 
 TODO
--Add more scenarios
--Add the js
+-Add more scenarios!!
 -Move the haml code from app.rb to partials
--Validation fore db
--Create a layout and some kind of design
+-(Validation fore db)
+-Create a layout 
+-Do some kind of design!!
