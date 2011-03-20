@@ -1,11 +1,18 @@
-%table
-  %thead
-    %tr
-    -for key in @items.first.keys
-      %td= key
-  %tbody
-    -for item in @items
-      %tr
+#slides
+  -for item in @items
+    %p
       -for value in item.values
-        %td= value
-
+        =value
+%footer
+  %script{:type=>'text/javascript',:src=>"https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"}
+  %script{:type=>'text/javascript',:src=>"/scripts/jquery.cycle.all.min.js"}
+  :javascript
+    $(function() {
+      var slides = $("#slides");
+      slides.children().hide();
+      slides.cycle({
+        fx: 'scrollDown',
+        speed: 1000,
+        timeout: 2000
+      })
+    });

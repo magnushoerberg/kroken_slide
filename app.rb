@@ -1,5 +1,9 @@
 class KrokenSlide < Sinatra::Base
+
 	enable :sessions
+	set :static, enable
+	set :root, File.dirname(__FILE__)
+
 	configure :production do; DataMapper.setup(:default, ENV['DATABASE_URL']) end
 
 	configure :development do
