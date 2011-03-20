@@ -5,3 +5,10 @@ To migrate the db type
 
 To run entire test sweet type:
 >cucumber
+
+TODO
+-Add more scenarios
+-Add the js
+-Move the haml code from app.rb to partials
+-Validation fore db
+-Create a layout and some kind of design
