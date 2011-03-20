@@ -3,8 +3,12 @@ small sinatra slideshow app, using jquery
 To migrate the db type
 >rake db:migrate
 
+To add some data to the db
+>rake db:seed
+
 To run entire test sweet type:
 >cucumber
+
 
 TODO
 -Add more scenarios

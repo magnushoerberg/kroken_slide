@@ -31,6 +31,7 @@ class KrokenSlide < Sinatra::Base
 		redirect '/slide-show'
 	end
 	get '/slide-show' do
-		session[:display_items].inspect
+		@items = session[:display_items]
+		haml :slide_show
 	end
 end

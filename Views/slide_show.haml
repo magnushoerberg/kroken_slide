@@ -1,0 +1,11 @@
+%table
+  %thead
+    %tr
+    -for key in @items.first.keys
+      %td= key
+  %tbody
+    -for item in @items
+      %tr
+      -for value in item.values
+        %td= value
+
