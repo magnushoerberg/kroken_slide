@@ -1,7 +1,6 @@
 class KrokenSlide < Sinatra::Base
 
 	enable :sessions
-	set :static, enable
 	set :root, File.dirname(__FILE__)
 
 	configure :production do; DataMapper.setup(:default, ENV['DATABASE_URL']) end
@@ -18,24 +17,25 @@ class KrokenSlide < Sinatra::Base
 	configure do; DataMapper.finalize end
 
 	get '/' do
-		@items = Item.all.collect{|item|
+		@items = Item.all(:order=>[:type, :price.asc]).collect{|item|
 			{	:namn => haml("%input{:name=>'#{item.name}[name]',:type=>'text', :value=>'#{item.name}',:readonly=>true}"),
 				:pris => haml("%input{:name=>'#{item.name}[price]',:type=>'text', :value=>'#{item.price.to_i}kr'}"),
 				"ska visas?" => haml("%input{:name=>'#{item.name}[display]',
-					:type=>'checkbox',:value=>false}")}
+					:type=>'checkbox', :checked=>'true'}")}
 		}
 		haml :index
 	end
 	post '/' do
-		session[:display_items] = []
+		event = Event.first_or_create(:name => params[:name])
+		puts params[:'value[:display]']
 		params.delete_if{|key,value|
 			value[:display] != "on" }.each_value{|value|
-			session[:display_items] << {:name=>value[:name],:price=>value[:price]}
+		  event.items << Item.first_or_create(:name=>value[:name],:price=>value[:price])
 		}
-		redirect '/slide-show'
+		redirect "/slide-show/#{event.id}"
 	end
-	get '/slide-show' do
-		@items = session[:display_items]
+	get '/slide-show/:id' do
+		@items = Item.all(:event_id => params[:id], :order => [:type, :price.asc])
 		haml :slide_show
 	end
 end

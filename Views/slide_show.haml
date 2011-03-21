@@ -4,10 +4,12 @@
     %link(rel="stylesheet" href="css/slide_show.css")
   %body
 #slides
-  -for item in @items
-    %p
-      -for value in item.values
-        =value
+  -(@items.length/20.0).ceil.times do
+    %span
+      -for page_items in @items.shift(20)
+        %p
+          -page_items.each do |key, value|
+            =value
 %footer
   %script{:type=>'text/javascript',:src=>"https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"}
   %script{:type=>'text/javascript',:src=>"/scripts/jquery.cycle.all.min.js"}
