@@ -1,0 +1,29 @@
+body {
+  background-color:black;
+  padding:10px;
+}
+
+.slide {
+  background-image:url('/images/logo.png');
+  background-repeat:no-repeat;
+  color:white;
+  font-size:200%;
+  margin: 0 auto;
+  padding: 15% 10% 2% 10%;
+  width:500px;
+  height:500px;
+  border: 5px solid white;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  line-height:150%;
+}
+
+.left {
+  padding-left:20%;
+}
+.right {
+  width:20%;
+  text-align:left;
+  float:right;
+}
+
