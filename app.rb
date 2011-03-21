@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class KrokenSlide < Sinatra::Base
 
 	enable :sessions
@@ -54,5 +55,10 @@ class KrokenSlide < Sinatra::Base
 	get '/slide-show/:id' do
 		@items = Event.get(params[:id]).items.all(:order=>[:type, :price.asc])
 		haml(:slide_show)
+	end
+	get "/item/name/all" do
+		items = Item.all(:name.like => "%#{params[:search_name]}%".capitalize,
+										 :fields => [:name]).collect{|item| item.name}
+		items.to_json
 	end
 end
