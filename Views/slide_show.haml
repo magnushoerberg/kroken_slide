@@ -1,13 +1,15 @@
 %html
   %head
     %title Kröken
-    %link(rel="stylesheet" href="css/slide_show.css")
+    %link(rel="stylesheet" href="/css/slide_show.css")
   %body
 #slides
-  -(@items.length/20.0).ceil.times do
-    %span
-      -for page_item in @items.shift(20)
-        %p #{page_item.name} #{page_item.price}
+  -(@items.length/10.0).ceil.times do
+    %span.slide
+      -for page_item in @items.shift(10)
+        %span.left #{page_item.name.capitalize} 
+        %span.right  #{page_item.price}:- 
+        %br
 %footer
   %script{:type=>'text/javascript',:src=>"https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"}
   %script{:type=>'text/javascript',:src=>"/scripts/jquery.cycle.all.min.js"}
@@ -16,8 +18,8 @@
       var slides = $("#slides");
       slides.children().hide();
       slides.cycle({
-        fx: 'scrollDown',
-        speed: 1000,
-        timeout: 2000
+        fx: 'scrollLeft',
+        speed: 1500,
+        timeout: 10000
       })
     });
