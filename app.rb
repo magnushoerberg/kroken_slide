@@ -18,16 +18,8 @@ class KrokenSlide < Sinatra::Base
 
 	get '/' do
 		event = Event.last
-		@event_name = event.name unless event.nil?
-		@items = Item.all(:order=>[:type, :price.asc]).collect{|item|
-			@name = item.name
-			@price = item.price
-			@use = event.nil? ? nil : (:checked if event.items.include?(item))
-			{	:namn => haml(:item_name_helper, :layout => false),
-				:pris => haml(:item_price_helper, :layout => false),
-				"ska visas?" => haml(:item_use_helper, :layout => false)
-			} 
-		}
+		@event = {:name => event.name, :id => event.id} unless event.nil?
+		@items = Event.last.items unless Event.last.nil?
 		haml :index
 	end
 	post '/' do
@@ -40,8 +32,27 @@ class KrokenSlide < Sinatra::Base
 		event.save
 		redirect "/slide-show/#{event.id}"
 	end
+	post '/remove/item' do
+		event_item = EventItem.first(:item_id => params[:item_id],
+																 :event_id => params[:event_id])
+		event_item.destroy
+	end
+	post '/add/item' do
+		item = case params[:type]
+		when "Öl" then
+						Beer.create(:name=>params[:item_name],
+												:price=>params[:item_price])
+		when "Cider" then
+						Cider.create(:name=>params[:item_name],
+												:price=>params[:item_price])
+		end
+		event = Event.get(params[:event_id])
+		event.items << item
+		event.save
+		haml(:item_partial, :locals=>{:item => item})
+	end
 	get '/slide-show/:id' do
 		@items = Event.get(params[:id]).items.all(:order=>[:type, :price.asc])
-		haml :slide_show
+		haml(:slide_show)
 	end
 end

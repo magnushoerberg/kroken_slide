@@ -1,0 +1,7 @@
+%span{:id => "#{item.id}"}
+  .left
+    %button{:onclick=>"removeItem(#{item.id})"}Ta Bort
+  .center
+    =item.name
+  .right
+    =item.price

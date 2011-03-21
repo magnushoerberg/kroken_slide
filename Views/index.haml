@@ -1,13 +1,27 @@
-%form{:method =>"post", :action=>"/"}
-  %input{:type=>"text", :name=>"event_name", :value => "#{@event_name}"}
-  %table
-    %thead
-      %tr
-      -@items.first.keys.each do |key|
-        %td= key
-    %tbody
-      -for item in @items
-        %tr
-          -item.each_value do |value|
-            %td= value
-  %input{:type=>"submit", :value=>"Starta bildspel"}
+%form{:method =>"post", :action=>"/add/item"}
+  %fieldset
+    %input{:type=>"hidden", :name=>"event_id", :value=>"#{@event[:id]}"}
+    %input{:type=>"text", :name=>"item_name"}
+    %input{:type=>"text", :name=>"item_price"}
+    %select{:name=>"type"}
+      %option Öl
+      %option Cider
+      %option Mat
+    %input{:type=>"button", :value=>"lägg till sort", :onclick=>"addItem()"}
+#items
+  -for item in @items
+    =haml(:item_partial, :locals=>{:item => item})
+:javascript
+  function removeItem(id) {
+    $.post("/remove/item",{item_id : id, event_id :#{@event[:id]}},
+      function() {
+        alert("#"+id);
+        $("#"+id).remove();
+      });
+    }
+  function addItem() {
+    alert(#{@event[:id]});
+    $.post("/add/item", $("form").serialize(), function (result) {
+      $("#items").append(result);
+    });
+  }
