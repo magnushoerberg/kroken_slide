@@ -3,10 +3,10 @@ class Item
 
   property :id, Serial
   property :name, String
-  property :price, Float
+  property :price, Integer
 	property :type, Discriminator
 	
-	belongs_to :event
+	has n, :events, :through => Resource
 end
 
 
@@ -16,5 +16,6 @@ class Cider < Item; end
 class Event
   include DataMapper::Resource
 	property :id, Serial
-	has n, :items
+	property :name, String
+	has n, :items, :through => Resource	
 end

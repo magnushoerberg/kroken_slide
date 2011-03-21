@@ -17,25 +17,31 @@ class KrokenSlide < Sinatra::Base
 	configure do; DataMapper.finalize end
 
 	get '/' do
+		event = Event.last
+		@event_name = event.name unless event.nil?
 		@items = Item.all(:order=>[:type, :price.asc]).collect{|item|
-			{	:namn => haml("%input{:name=>'#{item.name}[name]',:type=>'text', :value=>'#{item.name}',:readonly=>true}"),
-				:pris => haml("%input{:name=>'#{item.name}[price]',:type=>'text', :value=>'#{item.price.to_i}kr'}"),
-				"ska visas?" => haml("%input{:name=>'#{item.name}[display]',
-					:type=>'checkbox', :checked=>'true'}")}
+			@name = item.name
+			@price = item.price
+			@use = event.nil? ? nil : (:checked if event.items.include?(item))
+			{	:namn => haml(:item_name_helper, :layout => false),
+				:pris => haml(:item_price_helper, :layout => false),
+				"ska visas?" => haml(:item_use_helper, :layout => false)
+			} 
 		}
 		haml :index
 	end
 	post '/' do
-		event = Event.first_or_create(:name => params[:name])
-		puts params[:'value[:display]']
+		event = Event.first_or_create(:name => params[:event_name])
+		event.items.clear
 		params.delete_if{|key,value|
-			value[:display] != "on" }.each_value{|value|
-		  event.items << Item.first_or_create(:name=>value[:name],:price=>value[:price])
+			value[:use] != "on" }.each_value{|value|
+			event.items << Item.first_or_create(:name=>value[:name],:price=>value[:price])
 		}
+		event.save
 		redirect "/slide-show/#{event.id}"
 	end
 	get '/slide-show/:id' do
-		@items = Item.all(:event_id => params[:id], :order => [:type, :price.asc])
+		@items = Event.get(params[:id]).items.all(:order=>[:type, :price.asc])
 		haml :slide_show
 	end
 end
