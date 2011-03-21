@@ -10,8 +10,12 @@ namespace :db do
 		DataMapper.auto_migrate!
 	end
 	task :seed => :environment do
-		Item.create(:name => "test1", :price=>20)
-		Item.create(:name => "test2", :price=>25)
-		Item.create(:name => "test3", :price=>20)
+		40.times{|i|
+			if(i < 35)
+				Beer.create(:name => "öl#{i}", :price => rand(100))
+			else
+				Cider.create(:name => "cider#{i}", :price => rand(100))
+			end
+		}
 	end
 end
