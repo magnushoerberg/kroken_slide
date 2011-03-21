@@ -5,8 +5,9 @@ require 'sinatra'
 require 'haml'
 require 'dm-core'
 require 'haml'
+require 'json'
 
-require 'models/model.rb'
-require 'app'
+require './models/model'
+require './app'
 
 run KrokenSlide
