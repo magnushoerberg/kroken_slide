@@ -29,14 +29,20 @@
   $(function() {
     $("form input[name='item_name']").autocomplete({
       source: function(request,response) {
-        $.getJSON("/item/name/all",
+        $.getJSON("/item/all",
           {search_name : request.term},
           function(data) {
             response( $.map(data, function(item) {
-              return {label: item, value : item}
+              return {label: item.name,
+                      value : item.name,
+                      price :item.price}
             }));
           }
         )
       },
-      minLength: 2});
+      minLength: 2,
+      select: function( event, ui) {
+        $("form input[name='item_price']").val(ui.item.price);
+      }
+      });
   })

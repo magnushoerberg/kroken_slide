@@ -64,9 +64,12 @@ class KrokenSlide < Sinatra::Base
 		@items = Event.get(params[:id]).items.all(:order=>[:type, :price.asc])
 		haml(:slide_show)
 	end
-	get "/item/name/all" do
+	get "/item/all" do
 		items = Item.all(:name.like => "%#{params[:search_name]}%".capitalize,
-										 :fields => [:name]).collect{|item| item.name}
+										 :fields => [:name,:price]).collect{|item|
+			{:name => item.name,
+			:price => item.price}
+		}
 		items.to_json
 	end
 end
