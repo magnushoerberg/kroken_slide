@@ -1,6 +1,9 @@
 body {
+  margin:0;
+}
+#slides {
+  margin:0;
   background-color:black;
-  padding:10px;
 }
 
 .slide {
@@ -9,9 +12,9 @@ body {
   color:white;
   font-size:200%;
   margin: 0 auto;
-  padding: 15% 10% 2% 10%;
-  width:500px;
   height:500px;
+  width:500px;
+  padding: 15% 10% 2% 10%;
   border: 5px solid white;
   -moz-border-radius: 15px;
   border-radius: 15px;
@@ -27,3 +30,12 @@ body {
   float:right;
 }
 
+#items {
+  border: 3px solid black;
+  border-radius: 15px;
+}
+
+#item {
+  border-bottom: 1px solid black;
+  padding:5px;
+}

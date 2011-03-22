@@ -24,9 +24,10 @@ namespace :db do
 				name,price=row
         #Adds taxes and margins, and rounds to even 5, weigthed so eg. 20.49 rounds down and everything over rounds up.
      	  price = (((price.match(/\d*.\d*/).to_s.to_f/0.65)+2)/5).round*5 unless price.nil?
+        name = name.split(' ').map {|w| w.capitalize }.join(' ')
       	puts name
       	puts price
-      	item_type.first_or_create(:name => name.capitalize).update(:price => price)
+      	item_type.first_or_create(:name => name).update(:price => price)
 		end
     require 'csv'
     puts "Adding..."
