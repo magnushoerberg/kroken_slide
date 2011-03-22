@@ -65,9 +65,10 @@ class KrokenSlide < Sinatra::Base
 	end
 	get "/item/all" do
 		items = Item.all(:name.like => "%#{params[:search_name]}%".capitalize,
-										 :fields => [:name,:price]).collect{|item|
+										 :fields => [:name,:price, :type]).collect{|item|
 			{:name => item.name,
-			:price => item.price}
+			:price => item.price,
+			:type => item.type.to_s == "Beer" ? "Öl" : "Cider"}
 		}
 		items.to_json
 	end

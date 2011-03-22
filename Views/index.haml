@@ -37,7 +37,8 @@
             response( $.map(data, function(item) {
               return {label: item.name,
                       value : item.name,
-                      price :item.price}
+                      price :item.price,
+                      type :item.type}
             }));
           }
         )
@@ -45,6 +46,8 @@
       minLength: 2,
       select: function( event, ui) {
         $("form input[name='item_price']").val(ui.item.price);
+        $("form select option:selected").removeAttr("selected");
+        $("form select option:contains("+ui.item.type+")").attr("selected","selected");
       }
       });
   })
