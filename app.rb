@@ -49,12 +49,11 @@ class KrokenSlide < Sinatra::Base
 	post '/add/item' do
 		item = case params[:type]
 		when "Öl" then
-						Beer.create(:name=>params[:item_name],
-												:price=>params[:item_price])
+						Beer.first_or_create(:name=>params[:item_name])
 		when "Cider" then
-						Cider.create(:name=>params[:item_name],
-												:price=>params[:item_price])
+						Cider.first_or_create(:name=>params[:item_name])
 		end
+		item.update(:price => params[:item_price])
 		event = Event.get(params[:event_id])
 		event.items << item
 		event.save
