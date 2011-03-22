@@ -6,25 +6,28 @@ body {
 #slides {
   margin:0;
   background-color:black;
+  height:1920px;
 }
 
 .slide {
   background-image:url('/images/logo.png');
   background-repeat:no-repeat;
+  background-position: 15px 15px;
   color:white;
-  font-size:200%;
+  font-size:300%;
+  font-family:sans-serif;
   margin: 0 auto;
-  height:1920px;
-  width:800px;
-  padding: 15% 10% 2% 10%;
-  border: 5px solid white;
+  height:1000px;
+  width:1064px;
+  padding-top: 180px;
+  border: 8px solid white;
   -moz-border-radius: 15px;
   border-radius: 15px;
   line-height:150%;
 }
 
 .slide .left {
-  padding-left:20%;
+  padding-left:12%;
 }
 .right {
   width:20%;
