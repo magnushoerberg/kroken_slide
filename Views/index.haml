@@ -1,56 +1,45 @@
-%form{:method =>"post", :action=>"/add/item"}
-  %fieldset
-    %input{:type=>"hidden", :name=>"event_id", :value=>"#{@event[:id]}"}
-    %label Artikelnamn:
-    %input{:type=>"text", :name=>"item_name"}
-    %label Pris:
-    %input{:type=>"text", :name=>"item_price"}
-    %select{:name=>"type"}
-      %option Öl
-      %option Cider
-      %option Mat
-    %input{:type=>"button", :name=>"item_add", :value=>"lägg till sort", :onclick=>"addItem()"}
-#items
-  -for item in @items
-    =haml(:item_partial, :locals=>{:item => item})
-%a(tabindex="500" href="/slide-show/#{@event[:id]}") Starta slide showen
-:javascript
-  function removeItem(id) {
-    $.post("/remove/item",{item_id : id, event_id :#{@event[:id]}},
-      function() {
-        $("#"+id).remove();
-      });
-    }
-  function addItem() {
-    $.post("/add/item", $("form").serialize(), function (result) {
-      $("form input[name='item_name']").val("");
-      $("form input[name='item_price']").val("");
-      $("#items").append(result);
-    });
-  }
-  $(function() {
-    $("form input[name='item_name']").autocomplete({
-      source: function(request,response) {
-        $.getJSON("/item/all",
-          {search_name : request.term},
-          function(data) {
-            response( $.map(data, function(item) {
-              return {label: item.name,
-                      value : item.name,
-                      price :item.price,
-                      type :item.type}
-            }));
-          }
-        )
-      },
-      minLength: 2,
-      select: function( event, ui) {
-        $("form input[name='item_price']").val(ui.item.price);
-        $("form select option:selected").removeAttr("selected");
-        $("form select option:contains("+ui.item.type+")").attr("selected","selected");
-        $("form input[name='item_add']").focus();
-      },
-      close: function(event, ui) {
+#page
+  %form{:method =>"post", :action=>"/add/item"}
+    %fieldset
+      %input{:type=>"hidden", :name=>"event_id", :value=>"#{@event[:id]}"}
+      %label Artikelnamn:
+      %input{:type=>"text", :name=>"item_name"}
+      %label Pris:
+      %input{:type=>"text", :name=>"item_price"}
+      %select{:name=>"type"}
+        %option Öl
+        %option Cider
+        %option Mat
+      %input{:name=>"item_add",:type=>"button", :value=>"lägg till sort", :onclick=>"addItem()"}
+  #items
+    -for item in @items
+      =haml(:item_partial, :locals=>{:item => item})
+  %button(onClick="slideShow(#{@event[:id]})") Starta slideshow
+  :javascript
+    function slideShow(id){
+      window.location = '/slide-show/'+id
       }
-      });
-  })
+    $(function() {
+      $("form input[name='item_name']").autocomplete({
+        source: function(request,response) {
+          $.getJSON("/item/all",
+            {search_name : request.term},
+            function(data) {
+              response( $.map(data, function(item) {
+                return {label: item.name,
+                        value : item.name,
+                        price :item.price,
+                        type :item.type}
+              }));
+            }
+          )
+        },
+        minLength: 2,
+        select: function( event, ui) {
+          $("form input[name='item_price']").val(ui.item.price);
+          $("form select option:selected").removeAttr("selected");
+          $("form select option:contains("+ui.item.type+")").attr("selected","selected");
+          $("form input[name='item_add']").focus();
+        }
+        });
+    })

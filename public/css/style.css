@@ -1,6 +1,8 @@
 body {
+  width:100%;
   margin:0;
 }
+
 #slides {
   margin:0;
   background-color:black;
@@ -21,7 +23,7 @@ body {
   line-height:150%;
 }
 
-.left {
+.slide .left {
   padding-left:20%;
 }
 .right {
@@ -30,13 +32,18 @@ body {
   float:right;
 }
 
+#page {
+  width:50%;
+  margin: 0 auto;
+}
+
 #items {
   border: 3px solid black;
   border-radius: 15px;
-	
+  width:100%;
 }
 
-#item {
+.item {
   border-bottom: 1px solid black;
   padding:5px;
 }
