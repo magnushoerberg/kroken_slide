@@ -1,7 +1,8 @@
-%span{:id => "#{item.id}"}
-  .left
-    %button{:onclick=>"removeItem(#{item.id})"}Ta Bort
-  .center
+.item{:id => "#{item.id}"}
+  %span.left
+    %img{:src => "/images/delete.png", :onclick=>"removeItem(#{item.id})", :alt => "Ta bort #{item.name}"} 
+  %span.center
     =item.name
-  .right
+  %span.right
     =item.price
+    =":-"
