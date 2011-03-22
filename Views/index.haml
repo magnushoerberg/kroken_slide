@@ -23,6 +23,8 @@
     }
   function addItem() {
     $.post("/add/item", $("form").serialize(), function (result) {
+      $("form input[name='item_name']").val("");
+      $("form input[name='item_price']").val("");
       $("#items").append(result);
     });
   }
