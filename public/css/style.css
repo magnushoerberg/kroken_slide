@@ -13,7 +13,7 @@ body {
   font-size:200%;
   margin: 0 auto;
   height:500px;
-  width:500px;
+  width:800px;
   padding: 15% 10% 2% 10%;
   border: 5px solid white;
   -moz-border-radius: 15px;
@@ -33,9 +33,13 @@ body {
 #items {
   border: 3px solid black;
   border-radius: 15px;
+	
 }
 
 #item {
   border-bottom: 1px solid black;
   padding:5px;
+}
+.priceGroup {
+	margin-top: 35px;
 }

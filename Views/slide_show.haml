@@ -2,13 +2,30 @@
   -(@items.length/10.0).ceil.times do
     %span.slide
       -for page_item in @items.shift(10)
-        %span.left #{page_item.name.capitalize} 
-        %span.right  #{page_item.price}:- 
-        %br
+        %div
+          %span.left #{page_item.name.capitalize} 
+          %span.right  #{page_item.price}:- 
 %script{:type=>'text/javascript',:src=>"/scripts/jquery.cycle.all.min.js"}
 :javascript
+  function setGroupSpacing() {
+    $slideChildren = $(".slide").children();
+    $slideChildren.each(function(i) {
+      if( i > 1)
+      {
+      var currElement = $(this);
+      var prevValue = $($slideChildren)[i-1];
+      prevValue = $(prevValue).children().last().text();
+      var currValue = currElement.children().last().text();
+      if(prevValue != currValue)
+      {
+        currElement.addClass("priceGroup");
+      }
+      }
+    });
+    }
   $(function() {
     var slides = $("#slides");
+    setGroupSpacing();
     slides.children().hide();
     slides.cycle({
       fx: 'scrollLeft',

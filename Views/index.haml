@@ -9,11 +9,11 @@
       %option Öl
       %option Cider
       %option Mat
-    %input{:type=>"button", :value=>"lägg till sort", :onclick=>"addItem()"}
+    %input{:type=>"button", :name=>"item_add", :value=>"lägg till sort", :onclick=>"addItem()"}
 #items
   -for item in @items
     =haml(:item_partial, :locals=>{:item => item})
-%a(href="/slide-show/#{@event[:id]}") Starta slide showen
+%a(tabindex="500" href="/slide-show/#{@event[:id]}") Starta slide showen
 :javascript
   function removeItem(id) {
     $.post("/remove/item",{item_id : id, event_id :#{@event[:id]}},
@@ -48,6 +48,9 @@
         $("form input[name='item_price']").val(ui.item.price);
         $("form select option:selected").removeAttr("selected");
         $("form select option:contains("+ui.item.type+")").attr("selected","selected");
+        $("form input[name='item_add']").focus();
+      },
+      close: function(event, ui) {
       }
       });
   })
