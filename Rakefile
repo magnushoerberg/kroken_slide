@@ -22,7 +22,8 @@ namespace :db do
   task :parse_csv => :environment do
 		def parse_csv(row, item_type)
 				name,price=row
-     	 price = (price.match(/\d*.\d*/).to_s.to_f/0.65).ceil unless price.nil?
+        #Adds taxes and margins, and rounds to even 5, weigthed so eg. 20.49 rounds down and everything over rounds up.
+     	  price = (((price.match(/\d*.\d*/).to_s.to_f/0.65)+2)/5).round*5 unless price.nil?
       	puts name
       	puts price
       	item_type.first_or_create(:name => name.capitalize).update(:price => price)
