@@ -46,5 +46,12 @@ namespace :db do
      	  parse_csv(row, Cider)
     	end
 		end
-  end
+	end
+task :setup => :environment do
+	event = Event.create(:name => "kröken")
+		Item.all.each{|item| 
+	event.items << item
+	}
+	event.save
+	end
 end
