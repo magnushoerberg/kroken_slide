@@ -49,9 +49,9 @@ class KrokenSlide < Sinatra::Base
 	post '/add/item' do
 		item = case params[:type]
 		when "Öl" then
-						Beer.first_or_create(:name=>params[:item_name])
+			Beer.first_or_create(:name=>params[:item_name])
 		when "Cider" then
-						Cider.first_or_create(:name=>params[:item_name])
+			Cider.first_or_create(:name=>params[:item_name])
 		end
 		item.update(:price => params[:item_price])
 		event = Event.get(params[:event_id])
@@ -64,7 +64,7 @@ class KrokenSlide < Sinatra::Base
 		haml(:slide_show)
 	end
 	get "/item/all" do
-		items = Item.all(:name.like => "%#{params[:search_name]}%".capitalize,
+		items = Item.all(:name.like => "#{params[:search_name]}%".capitalize,
 										 :fields => [:name,:price, :type]).collect{|item|
 			{:name => item.name,
 			:price => item.price,
