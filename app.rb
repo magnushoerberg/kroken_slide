@@ -21,7 +21,7 @@ class KrokenSlide < Sinatra::Base
 		event = Event.last
 		redirect '/new/event' if event.nil?
 		@event = {:name => event.name, :id => event.id}
-		@items = Event.last.items
+		@items = Event.last.items.all(:order => [:price.asc])
 		haml :index
 	end
 	get '/new/event' do
