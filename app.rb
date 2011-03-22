@@ -19,9 +19,17 @@ class KrokenSlide < Sinatra::Base
 
 	get '/' do
 		event = Event.last
-		@event = {:name => event.name, :id => event.id} unless event.nil?
-		@items = Event.last.items unless Event.last.nil?
+		redirect '/new/event' if event.nil?
+		@event = {:name => event.name, :id => event.id}
+		@items = Event.last.items
 		haml :index
+	end
+	get '/new/event' do
+		haml :new_event
+	end
+	post '/new/event' do
+		Event.create(:name => params[:name])
+		redirect '/'
 	end
 	post '/' do
 		event = Event.first_or_create(:name => params[:event_name])
