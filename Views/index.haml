@@ -16,6 +16,19 @@
       =haml(:item_partial, :locals=>{:item => item})
   %button(onClick="slideShow(#{@event[:id]})") Starta slideshow
   :javascript
+    function addItem() {
+      $.post("/add/item", $("form").serialize(), function(result) {
+          $("form input[name='item_name']").val("");
+          $("form input[name='item_price']").val("");
+          $("#items").append(result);
+        });
+      }
+    function removeItem(id) {
+      $.post("/remove/item",{item_id : id, event_id : #{@event[:id]}},
+        function() {
+          $("#"+id).remove();
+        });
+    }
     function slideShow(id){
       window.location = '/slide-show/'+id
       }
