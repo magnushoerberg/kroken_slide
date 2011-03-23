@@ -55,7 +55,7 @@ class KrokenSlide < Sinatra::Base
 		end
 		item.update(:price => params[:item_price])
 		event = Event.get(params[:event_id])
-		event.items << item
+		event.items << item unless event.items.include?(item)
 		event.save
 		haml(:item_partial, :locals=>{:item => item})
 	end
