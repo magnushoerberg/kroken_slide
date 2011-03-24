@@ -52,6 +52,8 @@ class KrokenSlide < Sinatra::Base
 			Beer.first_or_create(:name=>params[:item_name])
 		when "Cider" then
 			Cider.first_or_create(:name=>params[:item_name])
+    when "Mat" then
+      Mat.first_or_create(:name=>params[:item_name])
 		end
 		item.update(:price => params[:item_price])
 		event = Event.get(params[:event_id])

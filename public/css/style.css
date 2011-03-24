@@ -7,6 +7,9 @@ body {
   margin:0;
   background-color:black;
   color:white;
+  font-family:sans-serif;
+  font-size:300%;
+  line-height:150%;
   height:1920px;
   width:1080px;
 }
@@ -19,8 +22,6 @@ body {
   background-image:url('/images/logo.png');
   background-repeat:no-repeat;
   background-position: 15px 15px;
-  font-size:300%;
-  font-family:sans-serif;
   margin: 0 auto;
   height:1000px;
   width:1064px;
@@ -28,13 +29,12 @@ body {
   border: 8px solid white;
   -moz-border-radius: 15px;
   border-radius: 15px;
-  line-height:150%;
 }
 
 .slide .left {
   padding-left:12%;
 }
-.right {
+.slide .right {
   width:20%;
   text-align:left;
   float:right;
@@ -43,6 +43,18 @@ body {
 #imagefield {
   margin-top:10%;
   text-align:center;
+}
+#imagefield h1{
+  text-decoration: underline;
+}
+#imagefield .left{
+  float:left;
+  margin-top:180px;
+  margin-left:210px;
+}
+#imagefield .right{
+  margin-left:85px;
+  float:left;
 }
 
 #page {
