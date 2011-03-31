@@ -75,3 +75,13 @@ body {
 .priceGroup {
 	margin-top: 35px;
 }
+
+.pdf_left {
+	float:left;
+}
+
+.pdf_right {
+	float:left;
+	margin-left:60%;
+}
+

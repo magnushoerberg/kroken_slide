@@ -16,7 +16,14 @@
     -for item in @items
       =haml(:item_partial, :locals=>{:item => item})
   %button(onClick="slideShow(#{@event[:id]})") Starta slideshow
+  %button(onClick="generatePdf()") Ladda ner prislista
   :javascript
+    function generatePdf() {
+      $.post("/generatepdf",{id: #{@event[:id]}},
+        function (){
+          window.location = "/prislista.pdf";
+        });
+    }
     function addItem() {
       $.post("/add/item", $("form").serialize(), function(result) {
           $("form input[name='item_name']").val("");

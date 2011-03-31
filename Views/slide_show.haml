@@ -1,19 +1,5 @@
-#slide_body
-  #slides
-    -(@items.length/11.0).ceil.times do
-      %span.slide
-        -for page_item in @items.shift(11)
-          %div
-            %span.left #{page_item.name} 
-            %span.right  #{page_item.price}:- 
-  //#imagefield
-  //  %h1 Veckans nyhet
-  //  %span.left
-  //    Coopers Extra Stout
-  //    %br
-  //    35:-
-  //  %span.right
-  //    %img{:src => '/images/footer_image.png'}
+=haml(:slide_show_partial)
+
 %script{:type=>'text/javascript',:src=>"/scripts/jquery.cycle.all.min.js"}
 :javascript
   function setGroupSpacing() {
@@ -39,6 +25,6 @@
     slides.cycle({
       fx: 'scrollLeft',
       speed: 1500,
-      timeout: 5000
+      timeout: 13000
     })
   });

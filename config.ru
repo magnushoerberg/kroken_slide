@@ -4,7 +4,7 @@ require 'bundler/setup'
 require 'sinatra'
 require 'haml'
 require 'dm-core'
-require 'haml'
+require 'pdfkit'
 require 'json'
 
 require './models/model'
