@@ -23,7 +23,7 @@ namespace :db do
 		def parse_csv(row, item_type)
 				name,price=row
         #Adds taxes and margins, and rounds to even 5, weigthed so eg. 21.49 rounds down and everything over rounds up.
-     	  price = (((price.match(/\d*.\d*/).to_s.to_f/0.65)+1)/5).round*5 unless price.nil?
+     	  price = (((price.match(/\d*.\d*/).to_s.to_f*1.25)+2.5)/5).round*5 unless price.nil?
         name = name.split(' ').map {|w| w.capitalize }.join(' ')
       	puts name
       	puts price

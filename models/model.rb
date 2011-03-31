@@ -13,6 +13,7 @@ end
 class Beer < Item; end
 class Cider < Item; end
 class Mat < Item; end
+class Vin < Item; end
 
 class Event
   include DataMapper::Resource
