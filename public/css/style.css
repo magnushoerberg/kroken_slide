@@ -62,6 +62,14 @@ body {
   margin: 0 auto;
 }
 
+ul.ui-autocomplete { list-style: none; background: white; padding: 0; margin: 0; position: absolute; float: left; -o-box-shadow: 0 5px 10px #555555; -webkit-box-shadow: 0 5px 10px #555555; -moz-box-shadow: 0 5px 10px #555555; -ms-box-shadow: 0 5px 10px #555555; box-shadow: 0 5px 10px #555555; -o-border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+ul.ui-autocomplete li { list-style: none; margin: 0; padding: 0; cursor: pointer; }
+ul.ui-autocomplete li a { padding: 5px; color: black; font-weight: bold; cursor: default; display: block; -moz-text-shadow: none; text-shadow: none; }
+ul.ui-autocomplete li a:hover { text-decoration: none; color: black; }
+ul.ui-autocomplete li a.ui-state-hover { color: white; text-decoration: none; background: #c04904; -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f25c05', endColorstr='#c04904'); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f25c05', endColorstr='#c04904'); background: -webkit-gradient(linear, left top, left bottom, from(#f25c05), to(#c04904)); background: -moz-linear-gradient(top, #f25c05, #c04904); -moz-text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4); text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4); }
+ul.ui-autocomplete li:first-child a { -o-border-radius: 10px 10px 0 0; -webkit-border-radius: 10px 10px 0 0; -moz-border-radius: 10px 10px 0 0; border-radius: 10px 10px 0 0; }
+ul.ui-autocomplete li:last-child a { -o-border-radius: 0 0 10px 10px; -webkit-border-radius: 0 0 10px 10px; -moz-border-radius: 0 0 10px 10px; border-radius: 0 0 10px 10px; }
+
 #items {
   border: 3px solid black;
   border-radius: 15px;
