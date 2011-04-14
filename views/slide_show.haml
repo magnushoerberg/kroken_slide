@@ -1,5 +1,12 @@
-=haml(:slide_show_partial)
-
+#slide_body
+  #slides
+    -(@items.length/11.0).ceil.times do
+      %span.slide
+        -for page_item in @items.shift(11)
+          %div
+            %span.left #{page_item.name}
+            %span.right #{page_item.name}
+  
 %script{:type=>'text/javascript',:src=>"/scripts/jquery.cycle.all.min.js"}
 :javascript
   function setGroupSpacing() {
