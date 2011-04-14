@@ -1,0 +1,11 @@
+%head
+  %link(rel="stylesheet" href="/css/pdf.css")
+#slides
+  -@items.each_index do |i|
+    -unless @items[i].price == @items[i-1].price 
+      .spacing
+    -unless @items[i].class == @items[i-1].class
+      .spacing #{@items[i].sort}
+    %div
+      %span.left #{@items[i].name} 
+      %span.right  #{@items[i].price}:- 

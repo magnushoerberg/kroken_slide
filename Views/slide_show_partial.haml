@@ -1,0 +1,16 @@
+#slide_body
+  #slides
+    -@items.each_index do |i|
+      -unless @items[i].price == items[i-1].price do
+        .spacing
+      %div
+        %span.left #{index[i].name} 
+        %span.right  #{index[i].price}:- 
+  #imagefield
+    %h1 Veckans nyhet
+    %span.left
+      Kronenbourg
+      %br
+      30:-
+    %span.right
+      %img{:src => '/images/footer_image.png'}

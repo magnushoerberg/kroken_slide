@@ -65,6 +65,10 @@ class KrokenSlide < Sinatra::Base
 		@items = Event.get(params[:id]).items.all(:order=>[:type, :price.asc])
 		haml(:slide_show)
 	end
+	get '/generatepdf/:id' do
+		@items = Event.get(params[:id]).items.all(:order=>[:type, :price.asc])
+		haml(:genpdf)
+	end
 	get "/item/all" do
 		items = Item.all(:name.like => "#{params[:search_name]}%".capitalize,
 										 :fields => [:name,:price, :type]).collect{|item|
