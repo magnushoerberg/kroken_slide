@@ -78,10 +78,10 @@ class KrokenSlide < Sinatra::Base
 		}
 		items.to_json
 	end
-	post '/generatepdf' do
+	get '/prislista.pdf' do
 		@items = Event.get(params[:id]).items.all(:order=>[:type, :price.asc])
 		kit = PDFKit.new(haml(:genpdf))
 		kit.stylesheets << './public/css/pdf.css'
-		kit.to_file('./public/prislista.pdf')
+		kit.to_pdf
 	end
 end

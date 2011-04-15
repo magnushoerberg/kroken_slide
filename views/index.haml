@@ -11,19 +11,13 @@
         %option Cider
         %option Mat
         %option Vin
-      %input{:name=>"item_add",:type=>"button", :value=>"lägg till sort", :onclick=>"addItem()"}
+      %input{:name=>"item_add",:type=>"submit", :value=>"lägg till sort"}
   #items
-    -for item in @items
+    -@items.each do |item|
       =haml(:item_partial, :locals=>{:item => item})
   %button(onClick="slideShow(#{@event[:id]})") Starta slideshow
-  %button(onClick="generatePdf()") Ladda ner prislista
+  %a{:href=>'/prislista.pdf', :target=>'_blank'} Ladda ner prislista
   :javascript
-    function generatePdf() {
-      $.post("/generatepdf",{id: #{@event[:id]}},
-        function (){
-          window.location = "/prislista.pdf";
-        });
-    }
     function addItem() {
       $.post("/add/item", $("form").serialize(), function(result) {
           $("form input[name='item_name']").val("");
@@ -39,8 +33,11 @@
     }
     function slideShow(id){
       window.location = '/slide-show/'+id
-      }
+    }
     $(function() {
+      $("form input").submit(function() {
+        addItem();
+      })
       $("form input[name='item_name']").autocomplete({
         source: function(request,response) {
           $.getJSON("/item/all",
@@ -60,7 +57,6 @@
           $("form input[name='item_price']").val(ui.item.price);
           $("form select option:selected").removeAttr("selected");
           $("form select option:contains("+ui.item.type+")").attr("selected","selected");
-          $("form input[name='item_add']").focus();
         }
-        });
+      });
     })

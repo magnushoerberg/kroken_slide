@@ -1,8 +1,5 @@
-.item{:id => "#{item.id}"}
-  %span.left
+.row{:id => "#{item.id}"}
+  .onecol
     %img{:src => "/images/delete.png", :onclick=>"removeItem(#{item.id})", :alt => "Ta bort #{item.name}"} 
-  %span.center
-    =item.name
-  %span.right
-    =item.price
-    =":-"
+  .ninecol= item.name
+  .twocol.last #{item.price}:-
