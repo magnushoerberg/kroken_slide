@@ -2,6 +2,7 @@ source "http://rubygems.org"
 gem "sinatra"
 gem "haml"
 gem "pdfkit"
+gem 'wkhtmltopdf'
 gem 'json'
 gem "dm-core"
 gem "do_sqlite3"
